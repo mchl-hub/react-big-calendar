@@ -1,6 +1,5 @@
 import React from 'react';
 import Api from './Api';
-import Intro from './Intro.md';
 import cn from 'classnames';
 import { render } from 'react-dom';
 
@@ -38,9 +37,6 @@ const Example = React.createClass({
           <h1>Big Calendar <i className='fa fa-calendar'/></h1>
           <p>such enterprise, very business.</p>
           <p>
-            <a href="#intro">
-              <i className='fa fa-play'/> Getting started
-            </a>
             {' | '}
             <a href="#api">
               <i className='fa fa-book'/> API documentation
@@ -82,7 +78,6 @@ const Example = React.createClass({
           </div>
         </div>
         <div className='docs'>
-          <Intro className='contain section'/>
           <Api className='contain section' />
         </div>
       </div>
