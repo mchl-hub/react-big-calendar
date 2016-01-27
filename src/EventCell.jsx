@@ -1,10 +1,27 @@
 import React from 'react';
+import { DragSource } from "react-dnd";
 import cn from 'classnames';
 import dates from './utils/dates';
 import { accessor as get } from './utils/accessors';
 
+const eventCellSource = {
+  beginDrag(props) {
+    return {
+      // TODO: define something that will differ EventCells
+    };
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
 let EventCell = React.createClass({
   render() {
+    const { connectDragSource, isDragging } = this.props;
     let {
         className, event, selected, eventPropGetter
       , startAccessor, endAccessor, titleAccessor
@@ -22,10 +39,14 @@ let EventCell = React.createClass({
     if (eventPropGetter)
       var { style, className: xClassName } = eventPropGetter(event, start, end, selected);
 
-    return (
+    return connectDragSource(
       <div
         {...props}
-        style={{...props.style, ...style}}
+        style={{
+          ...props.style,
+          ...style,
+          opacity: isDragging ? 0.5 : 1
+        }}
         className={cn('rbc-event', className, xClassName, {
           'rbc-selected': selected,
           'rbc-event-allday': isAllDay || dates.diff(start, dates.ceil(end, 'day'), 'day') > 1,
@@ -45,4 +66,4 @@ let EventCell = React.createClass({
   }
 });
 
-export default EventCell
+export default DragSource("event_cell", eventCellSource, collect)(EventCell)

@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import { DragDropContext } from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 import uncontrollable from 'uncontrollable';
 import cn from 'classnames';
 import {
@@ -405,4 +407,4 @@ let Calendar = React.createClass({
   }
 });
 
-export default uncontrollable(Calendar, { view: 'onView', date: 'onNavigate', selected: 'onSelectEvent' })
+export default DragDropContext(HTML5Backend)(uncontrollable(Calendar, { view: 'onView', date: 'onNavigate', selected: 'onSelectEvent' }))
