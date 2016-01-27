@@ -2,6 +2,26 @@ import React from 'react';
 import cn from 'classnames';
 import dates from './utils/dates';
 import { accessor as get } from './utils/accessors';
+import { DragSource } from "react-dnd";
+
+const source = {
+  beginDrag(props) {
+    const item = {id: props.id};
+    return item;
+  },
+
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+  }
+};
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
 
 let EventCell = React.createClass({
   render() {
@@ -22,7 +42,7 @@ let EventCell = React.createClass({
     if (eventPropGetter)
       var { style, className: xClassName } = eventPropGetter(event, start, end, selected);
 
-    return (
+    return this.props.connectDragSource(
       <div
         {...props}
         style={{...props.style, ...style}}
@@ -45,4 +65,6 @@ let EventCell = React.createClass({
   }
 });
 
-export default EventCell
+const DraggableEventCell = DragSource("event_cell", source, collect)(EventCell);
+
+export default DraggableEventCell
