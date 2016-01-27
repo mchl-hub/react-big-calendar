@@ -6,6 +6,34 @@ import { notify } from './utils/helpers';
 import { dateCellSelection, slotWidth, getCellAtX, pointInBox } from './utils/selection';
 import Selection, { getBoundsForNode } from './Selection';
 
+class SingleCell extends React.Component {
+
+  static propTypes = {
+    i: React.PropTypes.number,
+    slots: React.PropTypes.number,
+    selecting: React.PropTypes.bool,
+    startIdx: React.PropTypes.number,
+    endIdx: React.PropTypes.number
+  };
+
+  render() {
+    let i = this.props.i;
+    let slots = this.props.slots;
+    let selecting = this.props.selecting;
+    let startIdx = this.props.startIdx;
+    let endIdx = this.props.endIdx;
+    return (
+      <div
+        key={'bg_' + i}
+        style={segStyle(1, slots)}
+        className={cn('rbc-day-bg', {
+          'rbc-selected-cell': selecting && i >= startIdx && i <= endIdx
+        })}
+      />
+    );
+  }
+}
+
 class DisplayCells extends React.Component {
 
   static propTypes = {
@@ -40,13 +68,7 @@ class DisplayCells extends React.Component {
 
     for (var i = 0; i < slots; i++) {
       children.push(
-        <div
-          key={'bg_' + i}
-          style={segStyle(1, slots)}
-          className={cn('rbc-day-bg', {
-            'rbc-selected-cell': selecting && i >= startIdx && i <= endIdx
-          })}
-        />
+        <SingleCell i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
       )
     }
 

@@ -3,6 +3,7 @@
   "loose": [
     "all"
   ],
+  "sourceMaps": "inline",
   "plugins": [
     "object-assign",
     "jsx-fragment"
