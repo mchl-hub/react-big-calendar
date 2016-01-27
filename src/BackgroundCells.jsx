@@ -1,10 +1,26 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
+import { DropTarget } from "react-dnd";
 import cn from 'classnames';
 import { segStyle } from './utils/eventLevels';
 import { notify } from './utils/helpers';
 import { dateCellSelection, slotWidth, getCellAtX, pointInBox } from './utils/selection';
 import Selection, { getBoundsForNode } from './Selection';
+
+const singleCellTarget = {
+  drop(props, monitor) {
+    // TODO: call action that puts EventCell into SingleCell
+    // TODO: we can get dragged item by monitor.getItem() (previously set in Source via beginDrag func)
+    console.log("drop on target: ", props);
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  };
+}
 
 class SingleCell extends React.Component {
 
@@ -17,12 +33,14 @@ class SingleCell extends React.Component {
   };
 
   render() {
+    const { connectDropTarget, isOver } = this.props;
     let i = this.props.i;
     let slots = this.props.slots;
     let selecting = this.props.selecting;
     let startIdx = this.props.startIdx;
     let endIdx = this.props.endIdx;
-    return (
+    // TODO: use isOver to change the cell
+    return connectDropTarget(
       <div
         key={'bg_' + i}
         style={segStyle(1, slots)}
@@ -33,6 +51,8 @@ class SingleCell extends React.Component {
     );
   }
 }
+// TODO: move to seperate file
+const SingleCellTarget = DropTarget("event_cell", singleCellTarget, collect)(SingleCell);
 
 class DisplayCells extends React.Component {
 
@@ -68,7 +88,7 @@ class DisplayCells extends React.Component {
 
     for (var i = 0; i < slots; i++) {
       children.push(
-        <SingleCell i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
+        <SingleCellTarget i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
       )
     }
 
