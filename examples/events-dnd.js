@@ -66,24 +66,14 @@ let eventsList = [
     }
 ];
 
-function updateEventsList(event) {
-    console.log("updateEventsList");
-    return eventsList.map((elem) => {
-        if (elem.id === event.id) {
-            return {
-                id: event.id,
-                title: event.title,
-                start: event.start,
-                end: event.end
-            };
-        }
-        else {
-            return elem;
-        }
-    });
+function updateEventsList(id, event) {
+    const index = eventsList.findIndex((elem) => elem.id === id);
+    if (index >= 0) {
+        eventsList[index] = event;
+    }
 }
 
 export default {
-    get: () => { console.log("get list: ", eventsList); return eventsList},
-    set: (event) => { eventsList = updateEventsList(event); console.log("list: ", eventsList)}
+    get: () => eventsList,
+    set: updateEventsList
 }

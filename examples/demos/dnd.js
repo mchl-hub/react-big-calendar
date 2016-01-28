@@ -10,15 +10,15 @@ const defaultDate = new Date(2015, 3, 1);
 
 // Changes global list of events
 function moveEvent(event, cell) {
-    console.log("moveEvent function called: ", event, cell);
-    let start = event.start;
-    let end = event.end;
-    let seconds = (end.getTime() - start.getTime())/1000;
+    console.log("moveEvent function called");
+    const eventId = event.id;
+    let seconds = (event.end.getTime() - event.start.getTime())/1000;
 
-    event.start = new Date(cell.getTime());
-    event.end = new Date(cell.getTime() + seconds*1000);
-    console.log("updated event: ", event, seconds);
-    events.set(event);
+    const newEvent = Object.assign({}, event, {
+        start: new Date(cell.getTime()),
+        end: new Date(cell.getTime() + seconds*1000)
+    });
+    events.set(eventId, newEvent);
 }
 
 let Dnd = React.createClass({
