@@ -11,7 +11,8 @@ const singleCellTarget = {
   drop(props, monitor) {
     // TODO: call action that puts EventCell into SingleCell
     // TODO: we can get dragged item by monitor.getItem() (previously set in Source via beginDrag func)
-    console.log("drop on target: ", props);
+    let item = monitor.getItem();
+    console.log("drop event ", item.event, " on target ", props);
   }
 };
 
@@ -34,6 +35,7 @@ class SingleCell extends React.Component {
 
   render() {
     const { connectDropTarget, isOver } = this.props;
+    let rowIdx = this.props.rowIdx;
     let i = this.props.i;
     let slots = this.props.slots;
     let selecting = this.props.selecting;
@@ -81,14 +83,14 @@ class DisplayCells extends React.Component {
   }
 
   render(){
-    let { slots } = this.props;
+    let { slots, rowIdx } = this.props;
     let { selecting, startIdx, endIdx } = this.state
 
     let children = [];
 
     for (var i = 0; i < slots; i++) {
       children.push(
-        <SingleCellTarget i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
+        <SingleCellTarget rowIdx={rowIdx} i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
       )
     }
 

@@ -8,6 +8,7 @@ const eventCellSource = {
   beginDrag(props) {
     return {
       // TODO: define something that will differ EventCells
+      event: props.event
     };
   }
 };
