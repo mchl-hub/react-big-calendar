@@ -16,13 +16,14 @@ let demoRoot = 'https://github.com/intljusticemission/react-big-calendar/tree/ma
 const Example = React.createClass({
   getInitialState(){
     return {
-      selected: 'basic'
+      selected: 'dnd'
     };
   },
 
   render() {
     let selected = this.state.selected;
     let Current = {
+      dnd: require('./demos/dnd'),
       basic: require('./demos/basic'),
       selectable: require('./demos/selectable'),
       cultures: require('./demos/cultures'),
