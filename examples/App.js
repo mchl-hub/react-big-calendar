@@ -75,7 +75,7 @@ const Example = React.createClass({
                 <strong><i className='fa fa-code'/>{' view example source code'}</strong>
               </a>
             </div>
-            <Current />
+            <Current doRender={doRender}/>
           </div>
         </div>
         <div className='docs'>
@@ -91,4 +91,9 @@ const Example = React.createClass({
   }
 });
 
-render(<Example/>, document.getElementById('root'));
+function doRender() {
+  console.log("doRender function called");
+  render(<Example/>, document.getElementById('root'));
+}
+
+doRender();
