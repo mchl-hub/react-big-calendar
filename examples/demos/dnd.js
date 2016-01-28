@@ -3,8 +3,9 @@ import BigCalendar from 'react-big-calendar';
 import events from '../events-dnd';
 
 
-require('globalize/lib/cultures/globalize.culture.fr');
+require('globalize/lib/cultures/globalize.culture.en-GB');
 
+const defaultCulture = "en-GB";
 const defaultDate = new Date(2015, 3, 1);
 
 // Changes global list of events
@@ -30,9 +31,8 @@ let Dnd = React.createClass({
     render(){
         return (
             <BigCalendar
-                rtl={false}
                 events={events.get()}
-                cluture={'fr'}
+                culture={defaultCulture}
                 defaultDate={defaultDate}
                 onMoveEvent={this.onMoveEvent()}
             />
