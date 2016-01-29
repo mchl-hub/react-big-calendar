@@ -1,19 +1,19 @@
 import invariant from 'invariant';
 
  let messages = {
-  date: 'Date',
-  time: 'Time',
-  event: 'Event',
-  allDay: 'all day',
-  week: 'week',
-  day: 'day',
-  month: 'month',
-  previous: 'back',
-  next: 'next',
-  yesterday: 'yesterday',
-  tomorrow: 'tomorrow',
-  today: 'today',
-  agenda: 'agenda',
+  date: 'Data',
+  time: 'Czas',
+  event: 'Zdarzenie',
+  allDay: 'cały dzień',
+  week: 'tydzień',
+  day: 'dzień',
+  month: 'miesiąc',
+  previous: 'poprzedni',
+  next: 'następny',
+  yesterday: 'wczoraj',
+  tomorrow: 'jutro',
+  today: 'dzisiaj',
+  agenda: 'dziennik',
 
   showMore: total => `+${total} more`
 }

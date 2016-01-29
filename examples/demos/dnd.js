@@ -3,9 +3,9 @@ import BigCalendar from 'react-big-calendar';
 import events from '../events-dnd';
 
 
-require('globalize/lib/cultures/globalize.culture.en-GB');
+require('globalize/lib/cultures/globalize.culture.pl-PL');
 
-const defaultCulture = "en-GB";
+const defaultCulture = "pl-PL";
 const defaultDate = new Date(2015, 3, 1);
 
 // Changes global list of events
