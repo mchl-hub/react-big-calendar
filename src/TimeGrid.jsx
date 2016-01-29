@@ -109,6 +109,8 @@ let TimeGrid = React.createClass({
                 slots={range.length}
                 container={()=> this.refs.allDay}
                 selectable={this.props.selectable}
+                range={range}
+                onMoveEvent={this.props.onMoveEvent}
               />
               <div style={{ zIndex: 1, position: 'relative' }}>
                 { this.renderAllDayEvents(range, levels) }

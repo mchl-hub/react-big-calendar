@@ -36,7 +36,6 @@ class SingleCell extends React.Component {
 
   render() {
     const { connectDropTarget, isOver } = this.props;
-    let rowIdx = this.props.rowIdx;
     let i = this.props.i;
     let slots = this.props.slots;
     let selecting = this.props.selecting;
@@ -84,14 +83,14 @@ class DisplayCells extends React.Component {
   }
 
   render(){
-    let { slots, row, rowIdx } = this.props;
+    let { slots, range } = this.props;
     let { selecting, startIdx, endIdx } = this.state
 
     let children = [];
 
     for (var i = 0; i < slots; i++) {
       children.push(
-        <SingleCellTarget onMoveEvent={this.props.onMoveEvent} cell={row[i]} rowIdx={rowIdx} i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
+        <SingleCellTarget onMoveEvent={this.props.onMoveEvent} cell={range[i]} i={i} slots={slots} selecting={selecting} startIdx={startIdx} endIdx={endIdx} />
       )
     }
 

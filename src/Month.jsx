@@ -195,8 +195,7 @@ let MonthView = React.createClass({
       slots={7}
       ref={r => this._bgRows[idx] = r}
       onSelectSlot={onSelectSlot}
-      row={row}
-      rowIdx={idx}
+      range={row}
       onMoveEvent={this.props.onMoveEvent}
     />
     )
